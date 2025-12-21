@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I Love You ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff6a88, #ff99ac);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+#box {
+    background: white;
+    padding: 40px 60px;
+    border-radius: 25px;
+    font-size: 28px;
+    color: #b30059;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    animation: fade 1s ease-in-out;
+    z-index: 2;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+#start {
+    position: absolute;
+    bottom: 30px;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: white;
+    color: #b30059;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 24px;
+    animation: floatUp 4s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">Start My Love ❤️</div>
+<button id="start">Start</button>
+
+<audio id="music" loop>
+    <source src="chill.mp3.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+const loveMessages = [
+    "I love you ❤️",
+    "I love you forever",
+    "I love you endlessly",
+    "I love you deeply",
+    "I love you with all my heart",
+    "I love you always",
+    "I love you beyond words",
+    "I love you forever ❤️"
+];
+
+let i = 0;
+const box = document.getElementById("box");
+const music = document.getElementById("music");
+const startBtn = document.getElementById("start");
+
+startBtn.onclick = () => {
+    startBtn.style.display = "none";
+    music.volume = 0.4;
+    music.play();
+
+    setInterval(() => {
+        box.style.animation = "none";
+        box.offsetHeight;
+        box.style.animation = "fade 1s ease-in-out";
+        box.textContent = loveMessages[i];
+        i = (i + 1) % loveMessages.length;
+    }, 1200);
+
+    // Create hearts
+    setInterval(createHeart, 500);
+};
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+</script>
+
+</body>
+</html>
